@@ -7,7 +7,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('app', ['ionic', 'angular.filter', 'ui.bootstrap.datetimepicker', 'LocalStorageModule', 'firebase', 'highcharts-ng'])// , 'ngCordova'])
+angular.module('app', ['ionic', 'angular.filter', 'ui.bootstrap.datetimepicker', 'LocalStorageModule', 'firebase', 'highcharts-ng', 'ngCordova'])// , 'ngCordova'])
 
 .config(function ($stateProvider, $urlRouterProvider) {
 
@@ -99,7 +99,15 @@ angular.module('app', ['ionic', 'angular.filter', 'ui.bootstrap.datetimepicker',
                 }
             }
         })
-
+.state('tab.expensesdetail', {
+            url: '/expensesdetail/:expensekey',
+            views: {
+                'tab-expenses': {
+                    templateUrl: 'app/tab-expenseDetail.html',
+                    controller: 'ExpenseDetailCtrl'
+                }
+            }
+        })
          .state('tab.budget', {
              url: '/budget',
              views: {

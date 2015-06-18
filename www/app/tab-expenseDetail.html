@@ -1,0 +1,53 @@
+<ion-view view-title="Add Expense">
+    <ion-content class="padding">
+
+    <div class="list card">
+      <div class="item item-divider">{{expense.type}}</div>
+      <div class="item item-body">
+        <p>
+          {{expense.title}}
+        </p>
+          <p>
+              Amount <b>{{ expense.amount | currency }}</b>
+          </p>
+          <p>
+            {{expense.groupDate}}
+          </p>
+      </div>
+    </div>
+        <div class="list list-inset">
+                    
+           <!--  <div ng-show="{{settings.enableLocation}}">
+
+                <label class="item item-input">{{lat}}, {{lng}}</label>
+                <label class="item item-body">
+                    <ion-toggle ng-model="settings.showMap" toggle-class="toggle-calm">Show map</ion-toggle>
+                </label>
+                <p>
+                    <map ng-class="settings.showMap ? 'mapshow' : 'maphide'" on-create="mapCreated(map)"></map>
+                </p>
+            </div> -->
+
+            <div class="row" ng-repeat="image in images" ng-if="$index % 4 === 0">
+                <div class="col col-25" ng-if="$index < images.length">
+                    <img ng-src="data:image/jpeg;base64,{{images[$index].image}}" width="100%" />
+                </div>
+                <div class="col col-25" ng-if="$index + 1 < images.length">
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 1].image}}" width="100%" />
+                </div>
+                <div class="col col-25" ng-if="$index + 2 < images.length">
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 2].image}}" width="100%" />
+                </div>
+                <div class="col col-25" ng-if="$index + 3 < images.length">
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 3].image}}" width="100%" />
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+
+    <ion-nav-buttons side="right">
+        <button class="button button-icon icon ion-camera" ng-show="expensekey != null" ng-click="upload()"></button>        
+    </ion-nav-buttons>
+
+</ion-view>

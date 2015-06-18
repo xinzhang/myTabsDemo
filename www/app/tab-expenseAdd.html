@@ -15,6 +15,7 @@
             <label class="item item-input">
                 <input type="date" ng-model="expense.transactionDate" name="expAmount" class="item item-input-inset" placeholder="enter the transaction date." />
             </label>
+
             <div ng-show="{{settings.enableLocation}}">
 
                 <label class="item item-input">{{lat}}, {{lng}}</label>
@@ -25,54 +26,8 @@
                     <map ng-class="settings.showMap ? 'mapshow' : 'maphide'" on-create="mapCreated(map)"></map>
                 </p>
             </div>
+            
         </div>
-
-        <!--<ion-list>
-            <ion-item class="item-input">
-                <div class="col-50">
-                    Select your expense type
-                </div>
-                    <div class="col-50">
-                        
-                    </div>
-            </ion-item>
-            <ion-item class="item-input">
-                    <input type="text" ng-model="expense.title" name="expTitle" class="item item-input-inset" placeholder="enter your expense details" />                
-            </ion-item>
-            <ion-item>
-                <div class="row">
-                    <div class="col-50">Select your expense type</div>
-                    <div class="col-50">
-                        <input type="number" ng-model="expense.amount" name="expAmount" class="item item-input-inset" placeholder="enter your expense amount" />
-                    </div>
-                </div>
-            </ion-item>
-            <ion-item>
-                <div class="row">
-                    <div class="col-40">Select your expense type</div>
-                    <div class="col-60">
-
-                        <input type="date" ng-model="expense.transactionDate" name="exDate" class="item item-input-inset" />
-                    </div>
-                </div>
-            </ion-item>
-            -->
-
-            <!--<div class="col-50 item-input-inset">
-                <label class="item-input-wrapper">
-                    <input type="text" placeholder="{{expense.groupDate}}">
-                </label>
-                <button class="button button-small" ng-click="openDatePicker()">
-                    <i class="icon ion-calendar"></i>
-                </button>
-            </div>-->
-
-            <!--<ion-item>
-                <div ng-show="{{settings.enableLocation}}">
-                    {{lat}}, {{lng}} <ion-toggle ng-model="settings.showMap" toggle-class="toggle-calm">Show map</ion-toggle>
-                    <map ng-class="settings.showMap ? 'mapshow' : 'maphide'" on-create="mapCreated(map)"></map>
-                </div>
-            </ion-item>-->
 
     </ion-content>
 

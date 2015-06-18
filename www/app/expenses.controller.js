@@ -79,19 +79,21 @@ angular.module('app')
     }
 })
 
-.controller('ExpenseAddCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams) {
+.controller('ExpenseAddCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams, localStorageService, $firebaseArray, $cordovaCamera) {
     $scope.expense = ExpenseService.addNew();
     $scope.expenseTypes = ExpenseService.expenseTypes;
     $scope.settings = AppSettings;
 
-    var expensekey = null;
+    $scope.expensekey = null;
 
-    if ($stateParams.expensekey) {
-        expensekey = $stateParams.expensekey;
-        ExpenseService.getExpense(expensekey).then(function (data) {
+    if ($stateParams.expensekey) {        
+        $scope.expensekey = $stateParams.expensekey;
+
+        ExpenseService.getExpense($scope.expensekey).then(function (data) {
             $scope.expense = data;
             $scope.expense.transactionDate = new Date(data.transactionDateTime);
-        });;
+        });
+
     }
 
     active();
@@ -117,7 +119,7 @@ angular.module('app')
 
         ExpenseService.save($scope.expense);
         $state.go('tab.expenses');
-    }
+    }    
 
     $scope.openDatePicker = function () {
         $scope.tmp = {};
@@ -140,5 +142,59 @@ angular.module('app')
             ]
         });
     }
+
+})
+
+.controller('ExpenseDetailCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams, localStorageService, $firebaseArray, $cordovaCamera) {
+    
+    $scope.settings = AppSettings;
+
+    $scope.expensekey = null;
+
+    if ($stateParams.expensekey) {        
+        $scope.expensekey = $stateParams.expensekey;
+
+        ExpenseService.getExpense($scope.expensekey).then(function (data) {
+            $scope.expense = data;
+            $scope.expense.transactionDate = new Date(data.transactionDateTime);
+        });
+
+        if ($scope.expensekey != null)
+            {
+                var username = localStorageService.get('username');
+                var ref = new Firebase("https://xzexpenses.firebaseio.com/" + username + '/images/');  
+                var syncArray = $firebaseArray(ref.child($scope.expensekey));
+                $scope.images = syncArray;    
+            }         
+    }
+
+    active();
+
+    function active() {
+    }    
+
+    $scope.upload = function() {
+        var options = {
+            quality : 75,
+            destinationType : Camera.DestinationType.DATA_URL,
+            sourceType : Camera.PictureSourceType.CAMERA,
+            allowEdit : true,
+            encodingType: Camera.EncodingType.JPEG,
+            popoverOptions: CameraPopoverOptions,
+            targetWidth: 500,
+            targetHeight: 500,
+            saveToPhotoAlbum: false
+        };
+        $cordovaCamera.getPicture(options).then(function(imageData) {
+            syncArray.$add({image: imageData}).then(function() {
+                // $ionicPopup.alert({
+                //     title: 'Confirm',
+                //     template: 'Image has been uploaded'
+                // });
+            });
+        }, function(error) {
+            console.error(error);
+        });
+    }    
 
 })
