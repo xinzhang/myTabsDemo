@@ -2,7 +2,9 @@
     <ion-content class="padding">
         <div class="list list-inset">
             <label class="item item-input">
-                <select ng-model="expense.type" ng-options="item for item in expenseTypes"></select>
+                <select ng-model="expense.type" ng-options="item for item in expenseTypes">
+                    <option value="">Select one expense</option>
+                </select>
             </label>
             <label class="item item-input">
                 <input type="text" ng-model="expense.title" name="expTitle" class="item item-input-inset" placeholder="enter your expense details" />

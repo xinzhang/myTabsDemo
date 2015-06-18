@@ -30,11 +30,11 @@
 
           </div>
       </div>
-
+               
       <div class="list card" ng-show="appsettings.dashboardType == 'G'">
           <div class="item item-divider">Percentage</div>
-          <div class="item item-body">
-              <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+          <div class="item item-body" style="width:100%;height:430px">
+              <ion-scroll zooming="true" direction="xy">
                   <highchart id="chart1" config="pieChartConfig" class="span10 floatleft"></highchart>
                </ion-scroll>
             </div>
@@ -42,8 +42,8 @@
 
       <div class="list card" ng-show="appsettings.dashboardType == 'G'">
           <div class="item item-divider">Burndown</div>
-          <div class="item item-body ">
-              <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+          <div class="item item-body" style="width:100%;height:430px">
+              <ion-scroll zooming="true" direction="xy">
                   <highchart id="chart2" config="burndownChartConfig" class="span10 floatleft"></highchart>
               </ion-scroll>
           </div>
