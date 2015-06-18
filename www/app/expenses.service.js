@@ -160,6 +160,47 @@
 
     }
 
+    var getFirstExpense = function () {
+        var deferred = $q.defer();
+        var query = ref.orderByChild("transactionDateTime").limitToFirst(1);
+        query.on("child_added", function (d) {
+            // This will only be called for the last 100 messages
+            deferred.resolve(d.val());
+        });
+
+        return deferred.promise;
+    }
+    
+    var getLastExpense = function () {
+        var deferred = $q.defer();
+        var query = ref.orderByChild("transactionDateTime").limitToLast(1);
+        query.on("child_added", function (d) {
+            // This will only be called for the last 100 messages
+            deferred.resolve(d.val());
+        });
+
+        return deferred.promise;
+    }
+
+    var getExpenseRange = function (from, to) {
+        var deferred = $q.defer();
+        var query = ref.orderByChild("transactionDateTime").startAt(from).endAt(to);
+        query.on("child_added", function (d) {
+            if (d.numChildren() == 2) {
+                // Data is ordered by increasing height, so we want the first entry
+                var result = [];
+                d.forEach(function (item) {
+                    result.push(item.val());
+                    deferred.resolve(result);
+                });
+            } else {
+                deferred.resolve(d.val());
+            }            
+        });
+
+        return deferred.promise;
+    }
+
     return {
         expenseTypes: expenseTypes,
         expenses: expenses,
@@ -172,6 +213,9 @@
         deleteItem: deleteItem,
         getFirebaseExpenses: getFirebaseExpenses,
         getExpense: getExpense,
+        getFirstExpense: getFirstExpense,
+        getLastExpense: getLastExpense,
+        getExpenseRange: getExpenseRange,
     }
 
 }])

@@ -120,6 +120,17 @@ angular.module('app', ['ionic', 'angular.filter', 'ui.bootstrap.datetimepicker',
             }
         })
 
+     .state('tab.history', {
+         url: '/history',
+         views: {
+             'tab-history': {
+                 templateUrl: 'app/tab-history.html',
+                 controller: 'HistoryCtrl'
+             }
+         }
+     })
+
+
       .state('tab.settings', {
           url: '/settings',
           views: {

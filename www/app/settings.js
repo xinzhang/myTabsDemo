@@ -2,7 +2,7 @@
 angular.module('app').factory('AppSettings', function () {
     return {
         dashboardType: 'G',
-        enableLocation: true,
+        enableLocation: false,
         showMap: false   
     }
 
