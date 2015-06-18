@@ -10,6 +10,7 @@
 
     function refreshData() {
         var daystep = 24 * 60 * 60 * 1000;
+        
         $scope.BudgetList = [];
 
         if ($scope.budget.type == 'monthly') {
@@ -44,9 +45,11 @@
                         break;
                     }
                 }
-            }
+            }            
 
         }
+
+         $scope.$broadcast('scroll.refreshComplete');
 
     }
 
@@ -72,8 +75,8 @@
         }));
 
         $q.all(promises).then(function () {
-            refreshData();
             $ionicLoading.hide();
+            refreshData();            
         });
 
     }
