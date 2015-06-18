@@ -1,0 +1,12 @@
+{
+"expenses" : [
+        {
+            "id": 1,
+            "type": "coffee",
+            "title": "coffee",
+            "place": "",
+            "amount": 2.30,
+            "transactionDate": "2015-06-12T02:15:12.356Z"
+        }
+]
+}

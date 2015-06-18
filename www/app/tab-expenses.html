@@ -1,0 +1,61 @@
+﻿<ion-view title="Expenses">
+
+
+    <ion-content class="has-header">
+        <ion-refresher pulling-text="Pull to refresh..."
+                       on-refresh="refresh()">
+        </ion-refresher>
+
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="search" placeholder="Search" ng-model="searchText">
+        </label>
+
+        <div class="padding">
+            <div class="button-bar">
+                <a class="button button-small" ng-click="dateFilterExpense('all')">All</a>
+                <a class="button button-small" ng-click="dateFilterExpense('today')">Today</a>
+                <a class="button button-small" ng-click="dateFilterExpense('thisweek')">This Week</a>
+                <a class="button button-small" ng-click="dateFilterExpense('thismonth')">This Month</a>
+            </div>
+        </div>
+
+        <ion-list>
+
+            <div ng-repeat="(key, value) in expenses | dateRangefilter:dateRange | filter: searchText | groupBy : 'groupDate'">            
+                <div class="item item-divider">{{ key | date:'dd-MM-yyyy' }}</div>
+                <ion-item class="item" ng-repeat="item in value">
+                    <div>
+                        <span>
+                            <strong>{{ item.type }} </strong>
+                            <!--{{ item.transactionDate | date:'dd-MM-yyyy' }}-->
+                            <span ng-hide="item.title == item.type"> - {{item.title}}</span>
+                        </span>
+                        
+                        <span class="badge badge-dark">
+                            {{ item.amount | currency}}
+                        </span>
+                    </div>
+                    <ion-option-button class="button-positive" ui-sref="tab.expensesadd({expensekey: item.datakey})">Edit</ion-option-button>
+                    <ion-option-button class="button-assertive" ng-click="delete(item.datakey)">Delete</ion-option-button>
+                </ion-item>
+            </div>
+
+                <div class="item item-divider">
+                    &nbsp;
+                    <span class="badge badge-dark">
+                        Total: {{ expenses | dateRangefilter:dateRange | filter: searchText  | total:'amount' | currency}}
+                    </span>
+                </div>
+</ion-list>
+
+    </ion-content>
+
+    <ion-nav-buttons side="right">
+        <!--<button class="button icon ion-refresh" ng-click="refresh()"></button>-->
+        <button class="button icon ion-plus-round" ui-sref="tab.expensesadd()"></button>
+        <button class="button icon ion-android-delete" ng-click="deleteAll()"></button>
+        <!--<button class="button icon ion-eye" ng-click="openDatePicker()" ng-model="filteredDate" ></button>-->
+    </ion-nav-buttons>
+
+</ion-view>

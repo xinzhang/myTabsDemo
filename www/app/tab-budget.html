@@ -1,0 +1,31 @@
+<ion-view view-title="Budget">
+    <ion-content class="padding">
+        <div class="list card">
+
+            <div class="item item-divider">Current Budget Cycle</div>
+            <div class="item item-body">
+                <p>
+                    From <b>{{from}}</b> To <b>{{to}}</b>
+                </p>
+        
+                <p>
+                    Budget Calculation type: {{budget.type}}
+                </p>
+                <p ng-show="budget.type ==  'monthly'">
+                    Monthly start day: {{budget.monthlyStartDay}}
+                </p>
+                <p>
+                    Budget Amount: {{budget.amount}}
+                </p>
+
+            </div>
+
+        </div>
+    </ion-content>
+
+    <ion-nav-buttons side="right">
+        <button ng-show="budget.amount == NaN" class="button icon ion-plus-round" ui-sref="tab.budgetAdd"></button>
+        <button ng-show="budget.amount != NaN" class="button icon ion-edit" ui-sref="tab.budgetAdd"></button>
+    </ion-nav-buttons>
+
+</ion-view>

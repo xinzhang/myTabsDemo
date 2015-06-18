@@ -1,0 +1,52 @@
+<ion-view view-title="Dashboard">
+  <ion-content class="padding">
+    <div class="list card">
+      <div class="item item-divider">Current Budget Cycle</div>
+      <div class="item item-body">
+        <p>
+          From <b>{{from}}</b> To <b>{{to}}</b>          
+        </p>
+          <p>
+              Amount <b>{{ budget.amount | currency }}</b>
+          </p>
+      </div>
+    </div>
+
+      <div class="list card" ng-show="appsettings.dashboardType == 'T'">
+          <div class="item item-divider">Total Spent</div>
+          <div class="item item-body">
+              <div>
+                  Amount <b></b>{{ totalSpent | currency }}
+              </div>
+          </div>
+      </div>
+
+      <div class="list card" ng-show="appsettings.dashboardType == 'T'">          
+          <div class="item item-divider">Total Left</div>
+          <div class="item item-body">
+
+              <p>Days: {{daysLeft}}</p>
+              <p>Amount:{{ budgetLeft | currency }} </p>
+
+          </div>
+      </div>
+
+      <div class="list card" ng-show="appsettings.dashboardType == 'G'">
+          <div class="item item-divider">Percentage</div>
+          <div class="item item-body">
+              <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+                  <highchart id="chart1" config="pieChartConfig" class="span10 floatleft"></highchart>
+               </ion-scroll>
+            </div>
+      </div>
+
+      <div class="list card" ng-show="appsettings.dashboardType == 'G'">
+          <div class="item item-divider">Burndown</div>
+          <div class="item item-body ">
+              <ion-scroll zooming="true" direction="xy" style="width: 500px; height: 500px">
+                  <highchart id="chart2" config="burndownChartConfig" class="span10 floatleft"></highchart>
+              </ion-scroll>
+          </div>
+      </div>
+  </ion-content>
+</ion-view>

@@ -1,0 +1,36 @@
+<ion-view view-title="Edit Budget">
+    <ion-content class="padding">
+        <ion-item class="item item-divider"></ion-item>
+
+        <ion-item class="item item-body">
+            <div class="row">
+                <div class="col-50">Budget Type:</div>
+                <div class="col-50">
+                    <select ng-model="budget.type" ng-options="item for item in BudgetTypes"></select>
+                </div>
+            </div>
+        </ion-item>
+
+        <ion-item class="item item-body">
+            <div class="row">
+                <div class="col-50">Monthly Starting Day:</div>
+                <div class="col-50">
+                    <select ng-model="budget.monthlyStartDay" ng-options="item for item in Days"></select>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item class="item item-body">
+            <div class="row">
+                <div class="col-50">Budget Amount:</div>
+                <div class="col-50">
+                    <input type="number" ng-model="budget.amount" name="budgetAmount" class="item item-input" placeholder="enter your expense amount" />
+                </div>
+            </div>
+        </ion-item>
+
+    </ion-content>
+
+    <ion-nav-buttons side="right">
+        <button class="button" ng-click="save();">Save</button>
+    </ion-nav-buttons>
+</ion-view>

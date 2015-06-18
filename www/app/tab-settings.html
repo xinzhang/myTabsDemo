@@ -1,0 +1,30 @@
+<ion-view view-title="Settings">
+    <ion-content class="padding">
+        <ion-item class="item item-divider">Dashboard Settings</ion-item>
+        <ion-item class="item item-body">
+            <ion-radio ng-model="settings.dashboardType" ng-value="'T'">Text</ion-radio>
+            <ion-radio ng-model="settings.dashboardType" ng-value="'G'">Graphic</ion-radio>
+        </ion-item>
+        <ion-item class="item item-divider">Expense Settings</ion-item>
+        <ion-item class="item item-body">
+            <a class="item item-icon-right" ui-sref="tab.settings-expensetypes">
+                Manage Expense Types
+                <i class="icon ion-ios-arrow-right"></i>
+            </a>
+            <ion-toggle ng-model="settings.enableLocation" toggle-class="toggle-calm">Enable location</ion-toggle>
+            <ion-toggle ng-model="settings.showMap" toggle-class="toggle-calm">Show map</ion-toggle>
+        </ion-item>        
+        <ion-item class="item item-divider">My Account</ion-item>
+        <ion-item class="item item-body">
+            <a class="item item-icon-right" ui-sref="tab.settings-account">
+                Account Detail
+            </a>
+            <a class="item item-icon-right" ng-click="signout()">
+                Sign Out
+                <i class="icon ion-log-out icon-accessory"></i>
+            </a>
+        </ion-item>
+
+    </ion-content>
+
+</ion-view>

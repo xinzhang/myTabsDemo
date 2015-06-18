@@ -1,0 +1,85 @@
+/* Empty. Add your own CSS if you like */
+.done {
+  text-decoration: line-through;
+}
+
+map {
+  display: block;
+  width: 100%;
+  /*height: 100%;*/
+  height:200px;
+}
+
+.maphide {
+    width:0;
+    height:0;
+}
+
+.mapshow {
+    width:100%;
+    height:200px;
+}
+
+.scroll {
+  height: 100%;
+}
+
+.slider {
+  height: 95%;
+}
+.slider-slide {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  color: #000;
+  background-color: #fff;
+  background-image: url('bg-intro.jpg');
+  text-align: center;
+
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+  font-weight: 300;
+}
+
+.slider-slide h1{
+    color:#fff
+}
+
+.slider-slide p{
+    color:#fff
+}
+
+
+.floatleft {
+  float:left;
+}
+
+
+.logo {
+  position: relative;
+  display: block;
+  margin: 20px auto;
+  border-radius: 50px;
+  width: 100px;
+  height: 100px;
+  background: #cfb20c;
+  /* Old browsers */
+  background: -moz-linear-gradient(top, #cfb20c 0%, #f8d50e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #cfb20c), color-stop(100%, #f8d50e));
+  /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top, #cfb20c 0%, #f8d50e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top, #cfb20c 0%, #f8d50e 100%);
+  /* Opera 11.10+ */
+  background: -ms-linear-gradient(top, #cfb20c 0%, #f8d50e 100%);
+  /* IE10+ */
+  background: linear-gradient(to bottom, #cfb20c 0%, #f8d50e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfb20c', endColorstr='#f8d50e',GradientType=0 );
+  /* IE6-9 */ }
+
+  .logo span {
+    font-size: 40px;
+    color: #212121;
+    position: absolute;
+    top: 40%;
+    left: 40%; }

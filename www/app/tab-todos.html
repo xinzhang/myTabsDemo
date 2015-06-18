@@ -1,0 +1,15 @@
+<ion-view title="Todos">    
+    <ion-content>
+        <ion-list>
+            <ion-item ng-repeat="todo in todos" class="item item-icon-right" href="#/tab/todos/{{todo.id}}">
+                <!--href="#/tab/todos/{{todo.id}}">--> <!--ui-sref="tab.todosdetail({todo: $index})">-->
+                <span ng-class="{done: todo.done}">{{todo.title}}</span>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+
+    <ion-nav-buttons side="right">
+        <button class="button" ui-sref="tab.todosadd">Add</button>
+    </ion-nav-buttons> 
+</ion-view>

@@ -1,0 +1,26 @@
+﻿<ion-view view-title="Register">
+    <ion-content class="padding">
+        <form role="form" class="registerForm" name="registerForm" novalidate>
+            <div class="list list-inset">
+                <label class="item item-input">
+                    <input type="text" placeholder="Username" ng-model="data.username">
+                </label>
+                <label class="item item-input">
+                    <input type="password" name="password" placeholder="Password" ng-model="data.password">
+                </label>
+                <label class="item item-input">
+                    <input type="password" name="confirmPassword" placeholder="Confirm Password" ng-model="data.confirmpassword" compare-to="data.password">
+                </label>
+                <label class="item item-light">
+                    <span ng-show="registerForm.confirmPassword.$error.compareTo">Password not match</span>
+                </label>
+            </div>
+            <button class="button button-block button-calm"
+                    ng-click="register(registerForm.$valid)"
+                    ng-disabled="registerForm.$invalid">
+                Register
+            </button>
+        </form>
+</ion-content>
+</ion-view>
+
