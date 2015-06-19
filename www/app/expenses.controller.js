@@ -83,7 +83,7 @@ angular.module('app')
     $scope.expense = ExpenseService.addNew();
     $scope.expenseTypes = ExpenseService.expenseTypes;
     $scope.settings = AppSettings;
-
+    $scope.title = "Add Expense";
     $scope.expensekey = null;
 
     if ($stateParams.expensekey) {        
@@ -148,6 +148,7 @@ angular.module('app')
 .controller('ExpenseDetailCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams, localStorageService, $firebaseArray, $cordovaCamera) {
     
     $scope.settings = AppSettings;
+    $scope.title = "Detail";
 
     $scope.expensekey = null;
 

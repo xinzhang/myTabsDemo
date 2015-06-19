@@ -123,6 +123,9 @@
             }
         }
 
+        if (isNaN(exp.amount))
+            exp.amount = 0;
+
         if (exp.datakey) {
             exp.transactionDateTime = exp.transactionDate.getTime();
             ref.child(exp.datakey).set(exp);
