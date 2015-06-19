@@ -145,12 +145,14 @@ angular.module('app')
 
 })
 
-.controller('ExpenseDetailCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams, localStorageService, $firebaseArray, $cordovaCamera) {
+.controller('ExpenseDetailCtrl', function ($scope, $ionicPopup, ExpenseService, AppSettings, $ionicViewService, $state, $stateParams, localStorageService, $firebaseArray, $cordovaCamera, $ionicActionSheet) {
     
     $scope.settings = AppSettings;
     $scope.title = "Detail";
 
     $scope.expensekey = null;
+    $scope.imagesSelected = [];
+    $scope.selectedCount = 0;
 
     if ($stateParams.expensekey) {        
         $scope.expensekey = $stateParams.expensekey;
@@ -160,19 +162,82 @@ angular.module('app')
             $scope.expense.transactionDate = new Date(data.transactionDateTime);
         });
 
-        if ($scope.expensekey != null)
-            {
-                var username = localStorageService.get('username');
-                var ref = new Firebase("https://xzexpenses.firebaseio.com/" + username + '/images/');  
-                var syncArray = $firebaseArray(ref.child($scope.expensekey));
-                $scope.images = syncArray;    
-            }         
+        if ($scope.expensekey != null) {
+            var username = localStorageService.get('username');
+            var ref = new Firebase("https://xzexpenses.firebaseio.com/" + username + '/images/');
+            var syncArray = $firebaseArray(ref.child($scope.expensekey));
+            $scope.images = syncArray;
+
+            $scope.images.$loaded(function () {
+                for (var i = 0; i < $scope.images.length; i++)
+                {
+                    $scope.imagesSelected.push({selected: false});
+                }
+            });
+        }
     }
 
     active();
 
     function active() {
     }    
+
+    $scope.switchSelection = function (idx) {
+        $scope.imagesSelected[idx].selected = !$scope.imagesSelected[idx].selected;
+        if ($scope.imagesSelected[idx].selected)
+            $scope.selectedCount = $scope.selectedCount + 1;
+        else
+            $scope.selectedCount = $scope.selectedCount - 1;
+    }
+
+    $scope.actionSheet = function() {
+        if ($scope.selectedCount == 0)
+        {
+            $ionicPopup.alert({
+                title: 'Warning',
+                template: 'Please select images first. '
+            });
+
+            return;
+        }
+
+        // Show the action sheet
+        var hideSheet = $ionicActionSheet.show({
+            buttons: [
+                { text: 'Share(' + $scope.selectedCount + ')' }
+            ],
+            destructiveText: 'Delete(' + $scope.selectedCount + ')',
+            titleText: 'Modify your album',
+            cancelText: 'Cancel',
+            cancel: function() {
+                    // add cancel code..
+            },
+
+            buttonClicked: function(index) {
+                console.log('buttonclicked' + index);
+                return true;
+            },
+
+            destructiveButtonClicked : function() {
+                //$scope.images[0].$$hashKey
+                var selectedHashkey = [];
+
+                for (var i = 0; i < $scope.imagesSelected.length; i++)
+                {
+                    if ($scope.imagesSelected[i].selected)
+                    {
+                        selectedHashkey.push($scope.images[i]);
+                    }
+                }
+
+                for (var i=0; i<selectedHashkey.length; i++)
+                {
+                    $scope.images.$remove(selectedHashkey[i]);
+                }   
+                return true;
+            }
+        });
+    }
 
     $scope.upload = function() {
         var options = {
@@ -185,7 +250,8 @@ angular.module('app')
             targetWidth: 500,
             targetHeight: 500,
             saveToPhotoAlbum: false
-        };
+            };
+
         $cordovaCamera.getPicture(options).then(function(imageData) {
             syncArray.$add({image: imageData}).then(function() {
                 // $ionicPopup.alert({
@@ -196,6 +262,9 @@ angular.module('app')
         }, function(error) {
             console.error(error);
         });
-    }    
 
+    }
+
+    
+        
 })

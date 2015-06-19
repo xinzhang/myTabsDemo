@@ -42,7 +42,14 @@
     }
 
     var getFirebaseExpenses = function () {
+
         var deferred = $q.defer();
+        usernameCheck = localStorageService.get('username');
+        if (username != usernameCheck)
+        {
+            username = usernameCheck;
+            ref = new Firebase("https://xzexpenses.firebaseio.com/" + username + "/expenses/");
+        }
 
         ref.once('value', function (data) {
             expenses = [];

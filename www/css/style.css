@@ -83,3 +83,5 @@ map {
     position: absolute;
     top: 40%;
     left: 40%; }
+
+  img.selected {border:2px solid red}

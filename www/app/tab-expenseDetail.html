@@ -30,16 +30,16 @@
 
             <div class="row" ng-repeat="image in images" ng-if="$index % 4 === 0">
                 <div class="col col-25" ng-if="$index < images.length">
-                    <img ng-src="data:image/jpeg;base64,{{images[$index].image}}" width="100%" />
+                    <img ng-src="data:image/jpeg;base64,{{images[$index].image}}" width="100%" ng-class="{'selected' : imagesSelected[$index].selected} " ng-click="switchSelection($index)" />
                 </div>
                 <div class="col col-25" ng-if="$index + 1 < images.length">
-                    <img ng-src="data:image/jpeg;base64,{{images[$index + 1].image}}" width="100%" />
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 1].image}}" width="100%" ng-class="{'selected' : imagesSelected[$index+1].selected}" ng-click="switchSelection($index+1)" />
                 </div>
                 <div class="col col-25" ng-if="$index + 2 < images.length">
-                    <img ng-src="data:image/jpeg;base64,{{images[$index + 2].image}}" width="100%" />
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 2].image}}" width="100%" ng-class="{'selected' : imagesSelected[$index+2].selected}" ng-click="switchSelection($index+2)" />
                 </div>
                 <div class="col col-25" ng-if="$index + 3 < images.length">
-                    <img ng-src="data:image/jpeg;base64,{{images[$index + 3].image}}" width="100%" />
+                    <img ng-src="data:image/jpeg;base64,{{images[$index + 3].image}}" width="100%" ng-class="{'selected' : imagesSelected[$index+3].selected}" ng-click="switchSelection($index+3)" />
                 </div>
             </div>
         </div>
@@ -47,7 +47,8 @@
     </ion-content>
 
     <ion-nav-buttons side="right">
-        <button class="button button-icon icon ion-camera" ng-show="expensekey != null" ng-click="upload()"></button>        
+        <button class="button button-icon icon ion-camera" ng-show="expensekey != null" ng-click="upload()"></button>
+        <button class="button button-icon icon ion-flag" ng-show="expensekey != null" ng-click="actionSheet()"></button>
     </ion-nav-buttons>
 
 </ion-view>
