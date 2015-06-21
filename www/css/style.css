@@ -52,6 +52,13 @@ map {
   float:left;
 }
 
+.floatright {
+  float:right;
+}
+
+.bottom5 {
+    padding-bottom:5px;
+}
 
 .logo {
   position: relative;

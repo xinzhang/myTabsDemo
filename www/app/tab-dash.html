@@ -32,12 +32,32 @@
       </div>
                
       <div class="list card" ng-show="appsettings.dashboardType == 'G'">
-          <div class="item item-divider">Percentage</div>
-          <div class="item item-body" style="width:100%;height:430px">
+          <div class="item item-divider">
+              
+          </div>
+          <!--<div class="item item-body" style="width:100%;height:430px">
               <ion-scroll zooming="true" direction="xy">
-                  <highchart id="chart1" config="pieChartConfig" class="span10 floatleft"></highchart>
+                  <highchart id="chart1" config="stackbarChartConfig" class="span10 floatleft"></highchart>
                </ion-scroll>
-            </div>
+              <progress id="progress1" value="500" max="800"></progress>
+            </div>-->
+
+          <div class="item">        
+              
+              <div class="floatleft bottom5">    <strong class="small">Amount</strong></div>
+              <div class="floatright bottom5"><p class="text-right">{{budgetLeft|currency}} remaining</p></div>    
+                        
+              <progress id="progress1" value="500" max="800" class="span10"></progress>
+              <p class="small">{{totalSpent|currency}} of {{budget.amount|currency}}</p>
+          </div>
+
+          <div class="item">
+              <div class="floatleft bottom5"><strong class="small">Days left</strong></div>
+              <div class="floatright bottom5"><p class="small text-right">12 days remaining</p></div>
+
+              <progress id="progress2" value="12" max="30"></progress>
+          </div>
+
       </div>
 
       <div class="list card" ng-show="appsettings.dashboardType == 'G'">
