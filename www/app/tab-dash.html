@@ -46,8 +46,8 @@
               
               <div class="floatleft bottom5">    <strong class="small">Amount</strong></div>
               <div class="floatright bottom5"><p class="text-right">{{budgetLeft|currency}} remaining</p></div>    
-                        
-              <progress id="progress1" value="500" max="800" class="span10"></progress>
+                                      
+              <progress id="progress1" value="{{totalSpent}}" max="{{budget.amount}}" class="span10"></progress>
               <p class="small">{{totalSpent|currency}} of {{budget.amount|currency}}</p>
           </div>
 
@@ -55,7 +55,7 @@
               <div class="floatleft bottom5"><strong class="small">Days left</strong></div>
               <div class="floatright bottom5"><p class="small text-right">{{daysLeft}} days remaining</p></div>
 
-              <progress id="progress2" value="12" max="30"></progress>
+              <progress id="progress2" value="{{daysLeft}}" max="30"></progress>
           </div>
 
       </div>
