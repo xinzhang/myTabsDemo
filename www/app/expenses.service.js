@@ -139,10 +139,13 @@
             $rootScope.$emit('expense.change', expenses);
         }
         else {
-            expenses.push(exp);
+            
             //localStorageService.set('ionic.expenses', expenses);
             exp.transactionDateTime = exp.transactionDate.getTime();
-            ref.push(exp).once('value', function (data) {
+
+            ref.push(exp).once('value', function (data) {                
+                exp.datakey = data.key();
+                expenses.push(exp);                
                 $rootScope.$emit('expense.change', expenses);
             });
         }

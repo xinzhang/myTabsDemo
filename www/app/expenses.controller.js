@@ -47,7 +47,7 @@ angular.module('app')
 
     $scope.searchText = '';
 
-    $scope.dateRange = "";
+    $scope.dateRange = "today";
 
     $scope.dateFilterExpense = function (column) {
         $scope.dateRange = column;
