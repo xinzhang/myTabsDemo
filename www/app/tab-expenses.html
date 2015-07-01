@@ -13,7 +13,7 @@
 
         <div class="padding">
             <div class="button-bar">
-                <a class="button button-small" ng-click="dateFilterExpense('all')">All</a>
+                <a class="button button-small" ng-click="dateFilterExpense('thisbudgetmonth')">All</a>
                 <a class="button button-small" ng-click="dateFilterExpense('today')">Today</a>
                 <a class="button button-small" ng-click="dateFilterExpense('thisweek')">This Week</a>
                 <a class="button button-small" ng-click="dateFilterExpense('thismonth')">This Month</a>
@@ -22,10 +22,10 @@
 
         <ion-list>
 
-            <div ng-repeat="(key, value) in expenses | dateRangefilter:dateRange | filter: searchText | groupBy : 'groupDate'">            
+            <div ng-repeat="(key, value) in expenses | dateRangefilter: dateRange : budget.monthlyStartDay | filter: searchText | groupBy : 'groupDate'">
                 <div class="item item-divider">{{ key | date:'dd-MM-yyyy' }}</div>
                 <ion-item class="item" ng-repeat="item in value" ui-sref="tab.expensesdetail({expensekey: item.datakey})">
-                    <div>                        
+                    <div>
                         <span>
                             <strong>{{ item.type }} </strong>
                             <!--{{ item.transactionDate | date:'dd-MM-yyyy' }}-->
@@ -44,7 +44,7 @@
                 <div class="item item-divider">
                     &nbsp;
                     <span class="badge badge-dark">
-                        Total: {{ expenses | dateRangefilter:dateRange | filter: searchText  | total:'amount' | currency}}
+                        Total: {{ expenses | dateRangefilter:dateRange: budget.monthlyStartDay | filter: searchText  | total:'amount' | currency}}
                     </span>
                 </div>
 </ion-list>

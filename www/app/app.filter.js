@@ -18,7 +18,8 @@ angular.module('app').filter('total', ['$parse', function ($parse) {
 }]);
 
 angular.module('app').filter("dateRangefilter", function () {
-    return function (items, range) {
+    return function (items, range, monthlyStartDay) {
+
         var arrayToReturn = [];
 
         if (items == null)
@@ -48,6 +49,22 @@ angular.module('app').filter("dateRangefilter", function () {
             curr.setHours(0, 0, 0, 0);
             from = new Date(curr.getFullYear(), curr.getMonth(), 1);
             to = new Date(curr.getFullYear(), curr.getMonth() + 1, 0);
+        }
+
+        if (range == 'thisbudgetmonth') {
+            var curr = new Date;
+            //var monthlyStartDay = 15;
+            
+            curr.setHours(0, 0, 0, 0);
+
+            if (curr.getDay() < monthlyStartDay) {
+                from = new Date(curr.getFullYear(), curr.getMonth() - 1, monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth(), monthlyStartDay - 1);
+            }
+            else {
+                from = new Date(curr.getFullYear(), curr.getMonth(), monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth() + 1, monthlyStartDay - 1);
+            }
         }
 
         for (var i = 0; i < items.length; i++) {

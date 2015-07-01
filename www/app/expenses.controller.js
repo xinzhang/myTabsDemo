@@ -2,7 +2,7 @@
 angular.module('app')
 
 
-.controller('ExpensesCtrl', function ($rootScope, $scope, $ionicPopup, ExpenseService,$ionicLoading) {
+.controller('ExpensesCtrl', function ($rootScope, $scope, $ionicPopup, ExpenseService,$ionicLoading, BudgetService) {
 
     active();
 
@@ -11,7 +11,10 @@ angular.module('app')
         ExpenseService.getFirebaseExpenses().then(function (data) {
             refresh(data);
             $ionicLoading.hide();
-        })
+        });
+        BudgetService.getFirebaseBudget().then(function (data) {
+            $scope.budget = data;
+        });
     }
 
     function refresh(data) {

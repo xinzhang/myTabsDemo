@@ -14,10 +14,16 @@ angular.module('app')
             from = new Date(curr.setDate(curr.getDate() - curr.getDay() + 1));
             to = new Date(curr.setDate(curr.getDate() - curr.getDay() + 7));
         }
-
+        
         if ($scope.budget.type == 'monthly') {
-            from = new Date(curr.getFullYear(), curr.getMonth(), 1 + $scope.budget.monthlyStartDay - 1);
-            to = new Date(curr.getFullYear(), curr.getMonth() + 1, $scope.budget.monthlyStartDay - 1);
+            if (curr.getDay() < $scope.budget.monthlyStartDay) {
+                from = new Date(curr.getFullYear(), curr.getMonth() - 1, $scope.budget.monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth(), $scope.budget.monthlyStartDay - 1);
+            }
+            else {
+                from = new Date(curr.getFullYear(), curr.getMonth(), $scope.budget.monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth() + 1, $scope.budget.monthlyStartDay - 1);
+            }
         }
 
         $scope.from = moment(from).format('YYYY-MM-DD');
@@ -159,8 +165,14 @@ angular.module('app')
         }
 
         if ($scope.budget.type == 'monthly') {
-            from = new Date(curr.getFullYear(), curr.getMonth(), 1 + $scope.budget.monthlyStartDay - 1);
-            to = new Date(curr.getFullYear(), curr.getMonth() + 1, $scope.budget.monthlyStartDay - 1);
+            if (curr.getDay() < $scope.budget.monthlyStartDay) {
+                from = new Date(curr.getFullYear(), curr.getMonth()-1, $scope.budget.monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth(), $scope.budget.monthlyStartDay - 1);
+            }
+            else {
+                from = new Date(curr.getFullYear(), curr.getMonth(), $scope.budget.monthlyStartDay);
+                to = new Date(curr.getFullYear(), curr.getMonth() + 1, $scope.budget.monthlyStartDay - 1);
+            }
         }
 
         var daysCount = Math.floor((to - from) / daystep);
@@ -186,7 +198,7 @@ angular.module('app')
             }
         }
 
-        while (Spending.length == 0 || Spending[Spending.length - 1] == 0)
+        while (Spending.length != 0 && Spending[Spending.length - 1] == 0)
         {
             Spending.pop();
         }
